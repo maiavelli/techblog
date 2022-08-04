@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <script src="https://kit.fontawesome.com/7afa7fcea5.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+    <section class="hero is-medium is-info">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-start">
+                        <a class="navbar-item">Home</a>
+
+                        <a class="navbar-item">Sign Up</a>
+
+                        <a class="navbar-item">Dashboard</a>
+
+                        <a class="navbar-item">Login</a>
+
+                        <a class="navbar-item">Logout</a>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <p class="title"> Dashboard </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="box" id="edit-post-form">
+                <div class="content">
+                    <h4>Editing Post: Title</h4>
+                    <div class="field">
+                        <label class="label"> Edit Title </label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="New Title">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="label"> Edit Post </label>
+                            <textarea class="textarea" id="post-content" placeholder="Edit your post here"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-success">
+                                <span class="icon is-small">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <span> Save </span>
+                            </button>
+                        </div>
+
+                        <div class="control">
+                            <button class="button is-danger">
+                                <span  class="icon is-small">
+                                    <i class="fas fa-xmark"></i>
+                                </span> 
+                                <span> Cancel </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+</html>
