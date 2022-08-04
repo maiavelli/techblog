@@ -11,7 +11,7 @@
                 <h4> {{title}} </h4>
 
                 <div class="buttons has-addons is-right">
-                    <button class="button is-info is-small">
+                    <button class="button is-info is-small" id="edit-post" data-toggle="modal" data-target="#post{{id}}">
                         <span class="icon is-small">
                             <i class="fas fa-pencil"></i>
                         </span>
@@ -44,3 +44,48 @@
             </div>
         </div>
 </section>
+
+<section>
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <h5>Editing Post: {{title}} </h5>
+            <button class="modal-close" aria-label="close"></button>
+
+            <div class="field">
+                <label class="label"> Edit Title </label>
+                <div class="control">
+                    <input class="input" id="title{{id}}" type="text" placeholder="{{title}}" >
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label"> Edit Body </label>
+                    <textarea class="textarea" id="body{{id}}" placeholder="{{post_body}}"></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-success">
+                        <span class="icon is-small">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <span> Save </span>
+                    </button>
+                </div>
+
+                <div class="control">
+                    <button class="button is-danger">
+                        <span  class="icon is-small">
+                            <i class="fas fa-xmark"></i>
+                        </span> 
+                        <span> Cancel </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
