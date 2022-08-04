@@ -56,7 +56,7 @@ router.get('/signup', (req, res) => {
 });
 
 // get single post by id
-router.get('/post/:id', async, (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try {
         const singlePost = await Post.findOne({
             where: {
@@ -72,7 +72,7 @@ router.get('/post/:id', async, (req, res) => {
             model: Comment,
             attributes: [
                 'id',
-                'comment_text',
+                'comment_body',
                 'post_id',
                 'user_id',
                 'created_at'
@@ -87,64 +87,62 @@ router.get('/post/:id', async, (req, res) => {
             attributes: ['username']
         }
     ]   
-    })
-    .then(dbPostData => {
-        if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id!'});
-            return;
-        }
-        const post = dbPostData.get({ plain: true });
-        console.log(post);
-        res.render('single-post', { post, loggedIn: req.session.loggedIn });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
     });
+        if (!singlePost) {
+            return res.status(404).json({ message: 'No post found with this id!'});
+        }
+        const post = singlePost.get({ plain: true });
+        console.log(post);
+        res.render('single-post', { post, loggedIn: req.session.loggedIn, user: req.session.user_id });
+    }
+    catch(err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 });
 
 // get comments for a post
-router.get('/post-comments', (req, res) => {
-    Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        attributes: [
-            'id',
-            'content',
-            'title',
-            'created-at'
-        ],
-        include: [{
-            model: Comment,
-            attributes: [
-                'id', 
-                'comment_text',
-                'post_id',
-                'user_id',
-                'created_at'
-            ],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        }
-    ]
-    })
-    .then(dbPostData => {
-        if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id!'});
-            return;
-        }
-        const post = dbPostData.get({ plain: true });
-        console.log(post);
-        res.render('post-comments', { post, loggedIn: req.session.loggedIn });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
+// router.get('/post-comments', (req, res) => {
+//     Post.findOne({
+//         where: {
+//             id: req.params.id
+//         },
+//         attributes: [
+//             'id',
+//             'content',
+//             'title',
+//             'created-at'
+//         ],
+//         include: [{
+//             model: Comment,
+//             attributes: [
+//                 'id', 
+//                 'comment_text',
+//                 'post_id',
+//                 'user_id',
+//                 'created_at'
+//             ],
+//             include: {
+//                 model: User,
+//                 attributes: ['username']
+//             }
+//         }
+//     ]
+//     })
+//     .then(dbPostData => {
+//         if (!dbPostData) {
+//             res.status(404).json({ message: 'No post found with this id!'});
+//             return;
+//         }
+//         const post = dbPostData.get({ plain: true });
+//         console.log(post);
+//         res.render('post-comments', { post, loggedIn: req.session.loggedIn });
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     });
+// });
 
 module.exports = router;
 

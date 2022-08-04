@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="box">
+        <article class="media">
+            <figure class="media-left">
+                <p class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+                </p>
+            </figure>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong> {{post.title}} </strong>
+                            <br>
+                            {{post.post_body}}
+                            <br>
+                            <small>{{post.user.username}} · {{format_date post.created_at}} ·</small>
+                        </p>
+                    </div>
+
+                {{#if post.comments}}
+                {{#each post.comments}}
+                <article class="media">
+                    <figure class="media-left">
+                    <p class="image is-48x48">
+                        <img src="https://bulma.io/images/placeholders/96x96.png">
+                    </p>
+                    </figure>
+                    <div class="media-content">
+                        {{#if isEqual ../user user_id}}
+                        <div class="content">
+                            <p>
+                                <strong>{{user.username}}</strong>
+                                <br>
+                                {{comment_body}}
+                                <br>
+                                <small>{{format_date created_at}}</small>
+                            </p>
+
+                            <div class="buttons has-addons is-right" data-toggle="modal" id="edit-comment" data-target="#editComment{{id}}">
+                                <button class="button is-info is-outlined is-small">
+                                    <span class="icon is-small">
+                                        <i class="fas fa-pencil"></i>
+                                    </span>
+                                    <span>Edit Comment</span>
+                                </button>
+
+                                <button class="button is-danger is-small" id="delete-comment" data-toggle="modal" data-target="#deleteComment{{id}}">
+                                    <span class="icon is-small">
+                                        <i class="fas fa-trash-can"></i>
+                                    </span>
+                                    <span>Delete Comment</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </article>
+    </div>
+</div>
