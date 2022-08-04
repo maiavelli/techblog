@@ -29,9 +29,8 @@
             </nav>
         </div>
         <div class="hero-body">
-            <div class="container has-text-centered">
-                <p class="title"> Tech Blog </p>
-                <p class="subtitle"> thoughts, opinions, and articles on the current state of tech</p>
+            <div class="container">
+                <p class="title"> Dashboard </p>
             </div>
         </div>
     </section>
@@ -39,14 +38,22 @@
     <section>
         <div class="container">
             <div class="box">
-                <button class="button is-info"> 
-                    <span class="icon is-small">
-                        <i class="fas fa-circle-plus"></i>
-                    </span>
-                    <span> 
-                    <a class="has-text-white" href="./new-post.html"> Create New Post </a>
-                    </span>
-                </button>
+                <div class="field">
+                    <label class="label"> Title </label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Enter a title for your post (required)">
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label"> Content </label>
+                    <div class="control">
+                        <textarea class="textarea" placeholder="Write your post here"></textarea>
+                    </div>
+                </div>
+
+                <button class="button is-info"> Submit </button>
+            
             </div>
         </div>
     </section>
