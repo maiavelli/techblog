@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const { canTreatArrayAsAnd } = require('sequelize/types/utils');
 const sequelize = require('../config/connection');
 
 class Comment extends Model {}
