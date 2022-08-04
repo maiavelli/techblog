@@ -4,41 +4,49 @@ const router = require('express').Router();
 const withAuth = require('../utils/auth');
 
 // get all posts for logged in user
-router.get('/', withAuth, (req, res) => {
-    Post.findAll({
-        where: {
-            user_id: req.session.user_id
-        },
-        attributes: [
-            'id',
-            'title',
-            'content',
-            'created_at'
-        ],
-        include: [{
-            model: Comment,
-            attribute: [
+router.get('/', withAuth, async (req, res) => {
+    try{
+        const allUserPosts = await Post.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            attributes: [
                 'id',
-                'comment_text',
-                'post_id',
-                'user_id',
+                'title',
+                'body',
                 'created_at'
             ],
-            include: {
-                model: User,
-                attributes: ['username']
+            include: [{
+                model: Comment,
+                attributes: [
+                    'id',
+                    'comment_body',
+                    'post_id',
+                    'user_id',
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
             }
-        }
-    ]
+        ]
     })
-    .then(dbPostData => {
-        const posts = dbPostData.map(post = post.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: true });
+    const posts = allUserPosts.map(post => post.get ({ plain: true }));
+    console.log(posts.length)
+    const postlength = posts.length
+    console.log(req.session.username)
+    res.render('profile', {
+        posts,
+        postlength,
+        username: req.session.username,
+        loggedIn: true
     })
-    .catch(err => {
+}
+    catch(err) {
         console.log(err);
         res.status(500).json(err);
-    });
+    }
 });
 
 // edit post

@@ -1,46 +1,52 @@
-const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 const router = require('express').Router();
+const withAuth = require('../utils/auth');
 
 //get homepage 
-router.get('/', (req, res) => {
-    Post.findAll({
-        attributes: [
-            'id',
-            'title',
-            'content',
-            'created_at'
-        ],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-            incclude: {
-                model: User,
-                attributes: ['username']
+router.get('/', async (req, res) => {
+    console.log('session: ', req.session)
+    try{
+        const postData = await Post.findAll({
+            attributes: [
+                'id',
+                'title',
+                'body',
+                'created_at'
+            ],
+            include: [{
+                model: Comment,
+                attributes: [
+                    'id', 
+                    'comment_body', 
+                    'post_id', 
+                    'user_id', 
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
             }
-        },
-        {
-            model: User,
-            attributes: ['username']
-        }
-    ]
-    })
-    .then(dbPostData => {
-        const posts = dbPostData.map(post => post.get({ plain: true }));
-        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
-    })
-    .catch(err => {
+        ]
+    }); 
+    const posts = postData.map(post => post.get({ plain: true }));
+    console.log('posts: ', posts)
+    res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+    }
+    catch(err) {
         console.log(err);
         res.status(500).json(err);
-    });
+    }
 });
 
 // get login page
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
+        console.log(req.session.loggedIn)
+        res.redirect('/dashboard');
         return;
     }
+    console.log(req.session)
     res.render('login');
 });
 
@@ -50,14 +56,15 @@ router.get('/signup', (req, res) => {
 });
 
 // get single post by id
-router.get('/post/:id', (req, res) => {
-    Post.findOne({
-        where: {
+router.get('/post/:id', async, (req, res) => {
+    try {
+        const singlePost = await Post.findOne({
+            where: {
             id: req.params.id
         },
         attributes: [
             'id',
-            'content',
+            'post_body',
             'title',
             'created_at'
         ],

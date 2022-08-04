@@ -1,12 +1,12 @@
 [
     {
         "title": "Coding is fun!",
-        "body": "I love coding. It feels great being able to build an application completely from scratch! I've learned so much during my Northwestern Bootcamp!",
+        "post_body": "I love coding. It feels great being able to build an application completely from scratch! I've learned so much during my Northwestern Bootcamp!",
         "user_id": 1
     },
     {
         "title": "The Power of Google",
-        "body": "It's impossible to store everything in your brain. Whenever I get stuck when building an application, I turn to Google to see how others have fixed the problem. Some of my favorite resources are Youtube, StackOverflow, and Medium articles from other coders.",
+        "post_body": "It's impossible to store everything in your brain. Whenever I get stuck when building an application, I turn to Google to see how others have fixed the problem. Some of my favorite resources are Youtube, StackOverflow, and Medium articles from other coders.",
         "user_id": 2
     }
 ]

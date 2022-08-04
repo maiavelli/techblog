@@ -6,20 +6,20 @@
                 <div class="field">
                     <label class="label"> Edit Title </label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="New Title">
+                        <input class="input" id="edit-post-title" type="text" placeholder="New Title">
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="control">
                         <label class="label"> Edit Post </label>
-                        <textarea class="textarea" id="post-content" value="{{post.post_body}}"></textarea>
+                        <textarea class="textarea" id="edit-post-body" value="{{post.body}}"></textarea>
                     </div>
                 </div>
 
                 <div class="field is-grouped">
                     <div class="control">
-                        <button class="button is-success">
+                        <button class="button is-success" id="save-post-update">
                             <span class="icon is-small">
                                 <i class="fas fa-lock"></i>
                             </span>
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="control">
-                        <button class="button is-danger">
+                        <button class="button is-danger" id="cancel-post-update">
                             <span  class="icon is-small">
                                 <i class="fas fa-xmark"></i>
                             </span> 
@@ -41,4 +41,4 @@
     </div>
 </section>
 
-<script src="/public/javascript/"
+<script src="/public/javascript/edit-post.js"></script>
