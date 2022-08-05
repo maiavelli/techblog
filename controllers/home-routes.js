@@ -57,6 +57,7 @@ router.get('/signup', (req, res) => {
 
 // get single post by id
 router.get('/post/:id', async (req, res) => {
+    console.log(req.session)
     try {
         const singlePost = await Post.findOne({
             where: {
@@ -73,7 +74,6 @@ router.get('/post/:id', async (req, res) => {
             attributes: [
                 'id',
                 'comment_body',
-                'post_id',
                 'user_id',
                 'created_at'
             ],
