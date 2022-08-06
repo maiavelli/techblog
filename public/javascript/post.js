@@ -29,7 +29,7 @@ const createPostHandler = async (event) => {
     }
 };
 
-const newPostButton = document.querySelector('#new-post-button').addEventListener('click', createPostHandler);
+const newPostButton = document.querySelector('#new-post-save').addEventListener('click', createPostHandler);
 
 // edit post event handler
 const editPostHandler = async (event) => {
@@ -58,13 +58,8 @@ const editPostHandler = async (event) => {
     }
 }
 
-const updateButtons = document.querySelectorAll('#save-post-update');
+const updateButtons = document.querySelectorAll('#edit-post-save');
 [...updateButtons].forEach(updateButton => updateButton.addEventListener('click', editPostHandler));
-
-const cancelButtons = document.querySelectorAll('#cancel-post-update');
-[...cancelButtons].forEach(cancelButton => cancelButton.addEventListener('click', function(){
-    document.location.reload('/dashboard')
-}));
 
 // delete post event handler
 const deletePostHandler = async (event) => {

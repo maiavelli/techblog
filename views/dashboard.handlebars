@@ -11,7 +11,7 @@
                 <h4> {{title}} </h4>
 
                 <div class="buttons has-addons is-right">
-                    <button class="button is-info is-small" id="edit-post" data-toggle="modal" data-target="#post{{id}}">
+                    <button class="button is-info is-small js-modal-trigger" id="edit-post" data-toggle="modal" data-target="#editPost{{id}}">
                         <span class="icon is-small">
                             <i class="fas fa-pencil"></i>
                         </span>
@@ -20,7 +20,7 @@
                         </span>
                     </button>
 
-                    <button class="button is-danger is-small" id="delete-button">
+                    <button class="button is-danger is-small js-modal-trigger" id="delete-button">
                         <span class="icon is-small">
                             <i class="fas fa-trash-can"></i>
                         </span>
@@ -33,7 +33,7 @@
                     <p>{{format_date created_at}} </p>
                 </div>
 
-                <button class="button is-info"> 
+                <button class="button is-info js-modal-trigger" data-target="#addPost"> 
                     <span class="icon is-small">
                         <i class="fas fa-circle-plus"></i>
                     </span>
@@ -45,47 +45,83 @@
         </div>
 </section>
 
-{{!-- <section>
-    <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            <h5>Editing Post: {{title}} </h5>
-            <button class="modal-close" aria-label="close"></button>
+{{!-- new post modal --}}
+<div class="modal" id="addPost" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">New Post</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
 
-            <div class="field">
-                <label class="label"> Edit Title </label>
-                <div class="control">
-                    <input class="input" id="title{{id}}" type="text" placeholder="{{title}}" >
-                </div>
-            </div>
-
-            <div class="field">
-                <div class="control">
-                    <label class="label"> Edit Body </label>
-                    <textarea class="textarea" id="body{{id}}" placeholder="{{post_body}}"></textarea>
-                </div>
-            </div>
-
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="button is-success">
-                        <span class="icon is-small">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                        <span> Save </span>
-                    </button>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label"> Title </label>
+                    <div class="control">
+                        <input class="input" id="new-post-title" type="text" placeholder="Enter a title for your post (required)">
+                    </div>
                 </div>
 
-                <div class="control">
-                    <button class="button is-danger">
-                        <span  class="icon is-small">
-                            <i class="fas fa-xmark"></i>
-                        </span> 
-                        <span> Cancel </span>
-                    </button>
+                <div class="field">
+                    <label class="label"> Content </label>
+                    <div class="control">
+                        <textarea class="textarea" id="new-post-body" placeholder="Write your post here..."></textarea>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="new-post-save" data-id="{{id}}">Submit</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
         </div>
     </div>
-</section>
---}}
+</div>
+
+{{!-- edit post modal --}}
+<div class="modal" id="editPost{{id}}" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"> Editing Post: {{title}} </p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label"> Edit Title: </label>
+                    <div class="control">
+                        <textarea class="textarea" id="title{{id}}" rows="1"> {{title}} </textarea>
+                    </div>
+                </div>
+                <textarea class="textarea" id="editedPost{{id}}"> {{post_body}} </textarea>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="edit-post-save" data-id="{{id}}">Save Changes</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</div>
+
+{{!-- delete post modal --}}
+<div class="modal" id="deletePost{{id}}" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"> Deleting Post: {{title}} </p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <p>Are you sure you want to delete your {{title}} post?</p>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-danger" id="delete-post" data-id="{{id}}">Confirm</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</div>

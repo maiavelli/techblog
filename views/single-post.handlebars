@@ -146,6 +146,14 @@
 
 {{!-- script tag to open and close modals --}}
 <script>
+    function openModal($el) {
+        $el.classList.add('is-active');
+    };
+
+    function closeModal($el) {
+        $el.classList.remove('is-active');
+    };
+
     const modalTriggers = (document.querySelectorAll('.js-modal-trigger'));
     [...modalTriggers].forEach($trigger => {
         const modal = $trigger.dataset.target;
