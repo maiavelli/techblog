@@ -82,5 +82,5 @@ const deletePostHandler = async (event) => {
     }
 };
 
-const deleteButtons = document.querySelectorAll('#delete-button');
+const deleteButtons = document.querySelectorAll('#delete-post');
 [...deleteButtons].forEach(deleteBtn => deleteBtn.addEventListener('click', deletePostHandler))
