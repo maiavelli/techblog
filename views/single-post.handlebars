@@ -6,16 +6,33 @@
                 <img src="https://bulma.io/images/placeholders/128x128.png">
                 </p>
             </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong> {{post.title}} </strong>
-                            <br>
-                            {{post.post_body}}
-                            <br>
-                            <small>{{post.user.username}} · {{format_date post.created_at}} ·</small>
-                        </p>
-                    </div>
+            
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong> {{post.title}} </strong>
+                        <br>
+                        {{post.post_body}}
+                        <br>
+                        <small>{{post.user.username}} · {{format_date post.created_at}} ·</small>
+                    </p>
+
+                    {{!-- <div class="buttons has-addons is-right">
+                        <button class="button is-info is-outlined is-small js-modal-toggle"=>
+                            <span class="icon is-small">
+                                <i class="fas fa-pencil"></i>
+                            </span>
+                            <span>Edit Post</span>
+                        </button>
+
+                        <button class="button is-danger is-small">
+                            <span class="icon is-small">
+                                <i class="fas fa-trash-can"></i>
+                            </span>
+                            <span>Delete Post</span>
+                        </button>
+                    </div> --}}
+                </div>
 
                 {{#if post.comments}}
                 {{#each post.comments}}
@@ -28,15 +45,11 @@
                     <div class="media-content">
                         {{#if isEqual ../user user_id}}
                         <div class="content">
-                            <p>
-                                <strong>{{user.username}}</strong>
-                                <br>
-                                {{comment_body}}
-                                <br>
-                                <small>{{format_date created_at}}</small>
-                            </p>
+                            <p> <strong>{{user.username}}</strong> </p>
+                            <p> {{comment_body}} </p>
+                            <p> <small>{{format_date created_at}}</small> </p>
 
-                            <div class="buttons has-addons is-right" data-toggle="modal" id="edit-comment" data-target="#editComment{{id}}">
+                            <div class="buttons has-addons is-right js-modal-trigger"  id="edit-comment-button" data-target="#editComment{{id}}">
                                 <button class="button is-info is-outlined is-small">
                                     <span class="icon is-small">
                                         <i class="fas fa-pencil"></i>
@@ -44,7 +57,7 @@
                                     <span>Edit Comment</span>
                                 </button>
 
-                                <button class="button is-danger is-small" id="delete-comment" data-toggle="modal" data-target="#deleteComment{{id}}">
+                                <button class="button is-danger is-small js-modal-trigger" id="delete-comment-button" data-target="#deleteComment{{id}}">
                                     <span class="icon is-small">
                                         <i class="fas fa-trash-can"></i>
                                     </span>
@@ -54,7 +67,80 @@
                         </div>
                     </div>
                 </article>
+
+                <div class="buttons has-addons is-right mt-5 js-modal-trigger" data-target="#addComment">
+                    <button class="button is-info is-small">
+                        <span class="icon is-small">
+                            <i class="fas fa-circle-plus"></i>
+                        </span>
+                        <span>Add New Comment</span>
+                    </button>
+                </div>   
             </div>
         </article>
     </div>
 </div>
+
+{{!-- add comment modal --}}
+<div class="modal" id="addComment" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add A New Comment</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <textarea class="textarea" id="new-comment-body" placeholder="Write your comment here..."></textarea>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="new-comment-save" data-id="{{id}}">Save Changes</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</div>
+
+{{!-- edit comment modal --}}
+<div class="modal" id="editComment{{id}}" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Editing Comment</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <textarea class="textarea">{{comment_body}}</textarea>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="edit-comment-save" data-id="{{id}}">Save Changes</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</div>
+
+{{!-- script tag to open and close modals --}}
+<script>
+    const modalTriggers = (document.querySelectorAll('.js-modal-trigger'));
+    [...modalTriggers].forEach(modalTrigger => {
+        const modal = modalTrigger.dataset.target;
+        const $target = document.getElementById(modal);
+
+        modalTrigger.addEventListener('click', () => {
+            openModal($target);
+        });
+    });
+
+    const modalClosers = (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, #cancel'))
+    [...modalClosers].forEach($close) => {
+        const $target = $close.closest('.modal');
+
+        $close.addEventListener('click', () => {
+            closeModal($target);
+        });
+    };
+</script>
