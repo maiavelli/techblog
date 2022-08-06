@@ -14,20 +14,27 @@
             <nav class="navbar">
                 <div class="container">
                     <div class="navbar-start">
-                        <a class="navbar-item">Home</a>
+                        <a class="navbar-item" href="/">Home</a>
 
-                        <a class="navbar-item">Sign Up</a>
+                        <a class="navbar-item" href="/signup">Sign Up</a>
 
-                        <a class="navbar-item">Dashboard</a>
-
-                        <a class="navbar-item">Login</a>
+                        <a class="navbar-item" href="/dashboard">Dashboard</a>
 
                         {{#if loggedIn}}
-                        <a class="navbar-item" id="logout">Logout</a>
+                        <a class="navbar-item" id="logout" href="/">Logout</a> 
 
+                        {{else}}
+                        <a class="navbar-item" href="/login">Login</a>
+                        {{/if}}
                     </div>
                 </div>
             </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <p class="title"> Tech Blog </p>
+                <p class="subtitle"> thoughts, opinions, and articles on the current state of tech</p>
+            </div>
         </div>
     </section>
 
@@ -37,6 +44,6 @@
 
         {{#if loggedIn}}
         <script src="/public/javascript/logout.js"></script>
-
+        {{/if}}
     </body>
 </html>

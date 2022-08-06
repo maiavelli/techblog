@@ -45,38 +45,7 @@
         </div>
 </section>
 
-{{!-- new post modal --}}
-<div class="modal" id="addPost" aria-hidden="true">
-    <div class="modal-background">
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">New Post</p>
-                <button class="delete" aria-label="close"></button>
-            </header>
 
-            <section class="modal-card-body">
-                <div class="field">
-                    <label class="label"> Title </label>
-                    <div class="control">
-                        <input class="input" id="new-post-title" type="text" placeholder="Enter a title for your post (required)">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label"> Content </label>
-                    <div class="control">
-                        <textarea class="textarea" id="new-post-body" placeholder="Write your post here..."></textarea>
-                    </div>
-                </div>
-            </section>
-
-            <footer class="modal-card-foot">
-                <button class="button is-success" id="new-post-save" data-id="{{id}}">Submit</button>
-                <button class="button" id="cancel">Cancel</button>
-            </footer>
-        </div>
-    </div>
-</div>
 
 {{!-- edit post modal --}}
 <div class="modal" id="editPost{{id}}" aria-hidden="true">
@@ -120,6 +89,41 @@
 
             <footer class="modal-card-foot">
                 <button class="button is-danger" id="delete-post" data-id="{{id}}">Confirm</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{/if}}
+
+{{!-- new post modal --}}
+<div class="modal" id="addPost" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">New Post</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label"> Title </label>
+                    <div class="control">
+                        <input class="input" id="new-post-title" type="text" placeholder="Enter a title for your post (required)">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label"> Content </label>
+                    <div class="control">
+                        <textarea class="textarea" id="new-post-body" placeholder="Write your post here..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="new-post-save" data-id="{{id}}">Submit</button>
                 <button class="button" id="cancel">Cancel</button>
             </footer>
         </div>

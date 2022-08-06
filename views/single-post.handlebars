@@ -43,8 +43,9 @@
                     </p>
                     </figure>
                     <div class="media-content">
-                        {{#if isEqual ../user user_id}}
+                        
                         <div class="content">
+                            {{#if isEqual ../user user_id}}
                             <p> <strong>{{user.username}}</strong> </p>
                             <p> {{comment_body}} </p>
                             <p> <small>{{format_date created_at}}</small> </p>
@@ -64,10 +65,17 @@
                                     <span>Delete Comment</span>
                                 </button>
                             </div>
+
+                            {{else}}
+                            <p> <strong>{{user.username}}</strong> </p>
+                            <p> {{comment_body}} </p>
+                            <p> <small>{{format_date created_at}}</small> </p>
+                            {{/if}}
                         </div>
                     </div>
                 </article>
 
+                {{#if loggedIn}}
                 <div class="buttons has-addons is-right mt-5 js-modal-trigger" data-target="#addComment">
                     <button class="button is-info is-small">
                         <span class="icon is-small">
@@ -76,29 +84,9 @@
                         <span>Add New Comment</span>
                     </button>
                 </div>   
+                {{/if}}
             </div>
         </article>
-    </div>
-</div>
-
-{{!-- add comment modal --}}
-<div class="modal" id="addComment" aria-hidden="true">
-    <div class="modal-background">
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Add A New Comment</p>
-                <button class="delete" aria-label="close"></button>
-            </header>
-
-            <section class="modal-card-body">
-                <textarea class="textarea" id="new-comment-body" placeholder="Write your comment here..."></textarea>
-            </section>
-
-            <footer class="modal-card-foot">
-                <button class="button is-success" id="new-comment-save" data-id="{{id}}">Save Changes</button>
-                <button class="button" id="cancel">Cancel</button>
-            </footer>
-        </div>
     </div>
 </div>
 
@@ -143,7 +131,29 @@
         </div>
     </div>
 </div>
+{{/each}}
+{{/if}}
 
+{{!-- add comment modal --}}
+<div class="modal" id="addComment" aria-hidden="true">
+    <div class="modal-background">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add A New Comment</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <textarea class="textarea" id="new-comment-body" placeholder="Write your comment here..."></textarea>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="new-comment-save" data-id="{{id}}">Save Changes</button>
+                <button class="button" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</div>
 {{!-- script tag to open and close modals --}}
 <script>
     function openModal($el) {
