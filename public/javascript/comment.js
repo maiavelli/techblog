@@ -33,13 +33,15 @@ const commentEventHandler = async (event) => {
     }
 };
 
-// edit post handler 
+const newCommentButton = document.querySelector('#new-comment-save').addEventListener('click', commentEventHandler);
+
+// edit comment handler 
 const editCommentHandler = async (event) => {
     event.preventDefault();
     console.log(event.target);
 
     const commentID = event.target.getAttribute('data-id');
-    const editedComment = document.querySelector(`updatedComment${commentID}`).value.trim();
+    const editedComment = document.querySelector(`#edited-comment${commentID}`).value.trim();
     console.log(commentID, editedComment)
 
     const response = await fetch(`/api/comments/${commentID}`, {
@@ -53,7 +55,30 @@ const editCommentHandler = async (event) => {
     if (response >= 400) {
         alert('Error editing this comment. Please try again!')
     }
-} 
+};
 
-const editButtons = document.querySelectorAll('#edit-comment');
+const editButtons = document.querySelectorAll('#edit-comment-save');
 [...editButtons].forEach(editButton => editButton.addEventListener('click', editCommentHandler));
+
+// delete comment handler
+const deleteCommentHandler = async (event) => {
+    event.preventDefault();
+    console.log(event.target);
+
+    const commentID = event.target.getAttribute('data-id');
+    console.log(commentID);
+
+    const response = await fetch(`/api/comments/${commentID}`, {
+        method: 'DELETE',
+        body: JSON.stringify({ id: commentID }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    if (response.ok) {document.location.reload('/')
+    }
+    if (response >= 400) {
+        alert('Error deleting this comment. Please try again!')
+    }
+};
+
+const deleteButtons = document.querySelectorAll('#delete-comment');
+[...deleteButtons].forEach(deleteButton => deleteButton.addEventListener('click', deleteCommentHandler));
