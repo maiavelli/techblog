@@ -71,7 +71,7 @@ router.post('/', async (req, res) => {
             return;
         }
         if (req.body.password.length < 8) {
-            res.status(411).json({ message: 'Your password must be at least 8 characters!' });
+            res.status(410).json({ message: 'Your password must be at least 8 characters!' });
             return;
         }
         const newUser = await User.create({

@@ -1,8 +1,13 @@
+// sign up event handler
 async function signupFormHandler(event) {
     event.preventDefault();
 
     const username = document.querySelector('#username-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+
+    if (!username || !password) {
+        alert('You must provide a username and password before signing up!')
+    }
 
     if (username && password){
         const response = await fetch('/api/users', {
@@ -16,8 +21,15 @@ async function signupFormHandler(event) {
         if (response.ok) {
             console.log('Success!')
             document.location.replace('/dashboard');
-        } else {
-            alert(response.statusText);
+        } 
+        if (response.status === 409) {
+            alert('Username is already in use.');
+        }
+        if (response.status === 411) {
+            alert('Your username must be at least 4 characters long.')
+        }
+        if (response.status === 410) {
+            alert('Your password must be at least 8 characters long.')
         }
     }
 }
