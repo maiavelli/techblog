@@ -9,13 +9,9 @@
             
             <div class="media-content">
                 <div class="content">
-                    <p>
-                        <strong> {{post.title}} </strong>
-                        <br>
-                        {{post.post_body}}
-                        <br>
-                        <small>{{post.user.username}} · {{format_date post.created_at}} ·</small>
-                    </p>
+                    <p> <strong> {{post.title}} </strong> </p>
+                    <p>{{post.post_body}}</p>
+                    <p> <small>{{post.user.username}} · {{format_date post.created_at}} ·</small> </p>
 
                     {{!-- <div class="buttons has-addons is-right">
                         <button class="button is-info is-outlined is-small js-modal-toggle"=>
@@ -45,7 +41,7 @@
                     <div class="media-content">
                         
                         <div class="content">
-                            {{#if isEqual ../user user_id}}
+                            {{#if (isEqual ../user user_id) }}
                             <p> <strong>{{user.username}}</strong> </p>
                             <p> {{comment_body}} </p>
                             <p> <small>{{format_date created_at}}</small> </p>
@@ -67,9 +63,9 @@
                             </div>
 
                             {{else}}
-                            <p> <strong>{{user.username}}</strong> </p>
+                    
                             <p> {{comment_body}} </p>
-                            <p> <small>{{format_date created_at}}</small> </p>
+                            <p> <small> <strong>{{user.username}}</strong> · {{format_date created_at}} · </small> </p>
                             {{/if}}
                         </div>
                     </div>
