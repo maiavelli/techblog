@@ -61,8 +61,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     console.log(req.body)
     try {
-        const uniqueUsername = await User.findOne({ where: { email: req.body.username } });
-        if (!uniqueUsername) { 
+        const uniqueUsername = await User.findOne({ where: { username: req.body.username } });
+        if (uniqueUsername) { 
             res.status(409).json({ message: 'This username is taken! Please enter a unique username.' });
             return;
         }
