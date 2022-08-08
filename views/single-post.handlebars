@@ -12,22 +12,6 @@
                     <p> <strong> {{post.title}} </strong> </p>
                     <p>{{post.post_body}}</p>
                     <p> <small>{{post.user.username}} · {{format_date post.created_at}} ·</small> </p>
-
-                    {{!-- <div class="buttons has-addons is-right">
-                        <button class="button is-info is-outlined is-small js-modal-toggle"=>
-                            <span class="icon is-small">
-                                <i class="fas fa-pencil"></i>
-                            </span>
-                            <span>Edit Post</span>
-                        </button>
-
-                        <button class="button is-danger is-small">
-                            <span class="icon is-small">
-                                <i class="fas fa-trash-can"></i>
-                            </span>
-                            <span>Delete Post</span>
-                        </button>
-                    </div> --}}
                 </div>
 
                 {{#if post.comments}}
@@ -72,7 +56,7 @@
                 </article>
 
                 {{#if loggedIn}}
-                <div class="buttons has-addons is-right mt-5 js-modal-trigger" data-target="#addComment">
+                <div class="buttons has-addons is-right mt-5 js-modal-trigger" data-target="addComment">
                     <button class="button is-info is-small">
                         <span class="icon is-small">
                             <i class="fas fa-circle-plus"></i>
