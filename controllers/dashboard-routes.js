@@ -13,7 +13,7 @@ router.get('/', withAuth, async (req, res) => {
             attributes: [
                 'id',
                 'title',
-                'body',
+                'post_body',
                 'created_at'
             ],
             include: [{
@@ -40,7 +40,7 @@ router.get('/', withAuth, async (req, res) => {
     console.log(posts.length)
     const postlength = posts.length
     console.log(req.session.username)
-    res.render('profile', {
+    res.render('dashboard', {
         posts,
         postlength,
         username: req.session.username,

@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
                     model: Comment,
                     attributes: [
                         'id',
-                        'body',
+                        'comment_body',
                         'user_id'
                     ],
                     include: {
@@ -85,7 +85,7 @@ router.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
             title: req.body.title,
-            content: req.body.post_body,
+            post_body: req.body.post_body,
             user_id: req.session.user_id
         },
         {

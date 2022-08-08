@@ -46,7 +46,7 @@
                             <p> {{comment_body}} </p>
                             <p> <small>{{format_date created_at}}</small> </p>
 
-                            <div class="buttons has-addons is-right js-modal-trigger"  id="edit-comment-button" data-target="#editComment{{id}}">
+                            <div class="buttons has-addons is-right js-modal-trigger"  id="edit-comment-button" data-target="editComment{{id}}">
                                 <button class="button is-info is-outlined is-small">
                                     <span class="icon is-small">
                                         <i class="fas fa-pencil"></i>
@@ -54,7 +54,7 @@
                                     <span>Edit Comment</span>
                                 </button>
 
-                                <button class="button is-danger is-small js-modal-trigger" data-target="#deleteComment{{id}}">
+                                <button class="button is-danger is-small js-modal-trigger" data-target="deleteComment{{id}}">
                                     <span class="icon is-small">
                                         <i class="fas fa-trash-can"></i>
                                     </span>
@@ -150,34 +150,6 @@
         </div>
     </div>
 </div>
-{{!-- script tag to open and close modals --}}
-<script>
-    function openModal($el) {
-        $el.classList.add('is-active');
-    };
 
-    function closeModal($el) {
-        $el.classList.remove('is-active');
-    };
-
-    const modalTriggers = (document.querySelectorAll('.js-modal-trigger'));
-    [...modalTriggers].forEach($trigger => {
-        const modal = $trigger.dataset.target;
-        const $target = document.getElementById(modal);
-
-        $trigger.addEventListener('click', () => {
-            openModal($target);
-        });
-    });
-
-    const modalClosers = (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, #cancel'))
-    [...modalClosers].forEach($close) => {
-        const $target = $close.closest('.modal');
-
-        $close.addEventListener('click', () => {
-            closeModal($target);
-        });
-    };
-</script>
-
-<script src="/public/javascript/comment.js"></script>
+<script src="/javascript/modal.js"
+<script src="/javascript/comment.js"></script>

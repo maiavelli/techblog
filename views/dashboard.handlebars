@@ -7,11 +7,13 @@
         {{#if postlength}}
         {{#each posts as |post|}}
         <div class="box">
-            <div class="content">
-                <h4> {{title}} </h4>
+            <div class="content">   
+                <h5> {{title}} </h5>
+                <p>{{post_body}}</p>
+                <p><small> {{format_date created_at}} </small></p>
 
                 <div class="buttons has-addons is-right">
-                    <button class="button is-info is-small js-modal-trigger" data-toggle="modal" data-target="#editPost{{id}}">
+                    <button class="button is-info is-small js-modal-trigger" data-toggle="modal" data-target="editPost{{id}}">
                         <span class="icon is-small">
                             <i class="fas fa-pencil"></i>
                         </span>
@@ -20,7 +22,7 @@
                         </span>
                     </button>
 
-                    <button class="button is-danger is-small js-modal-trigger" data-target="#deletePost{{id}}">
+                    <button class="button is-danger is-small js-modal-trigger" data-target="deletePost{{id}}">
                         <span class="icon is-small">
                             <i class="fas fa-trash-can"></i>
                         </span>
@@ -28,27 +30,21 @@
                             <a class="has-text-white">Delete</a>
                         </span>
                     </button>
-
-                    <p>{{post_body}}</p>
-                    <p>{{format_date created_at}} </p>
                 </div>
-
-                <button class="button is-info js-modal-trigger" data-target="#addPost"> 
+            </div>
+        </div>
+                <button class="button is-info js-modal-trigger" data-target="addPost"> 
                     <span class="icon is-small">
                         <i class="fas fa-circle-plus"></i>
                     </span>
                     <span> 
-                    <a class="has-text-white" href="./new-post.html"> Create New Post </a>
+                    <a class="has-text-white"> Create New Post </a>
                     </span>
                 </button>
-            </div>
-        </div>
 </section>
 
-
-
 {{!-- edit post modal --}}
-<div class="modal" id="editPost{{id}}" aria-hidden="true">
+<div class="modal" id="editPost{{id}}">
     <div class="modal-background">
         <div class="modal-card">
             <header class="modal-card-head">
@@ -75,7 +71,7 @@
 </div>
 
 {{!-- delete post modal --}}
-<div class="modal" id="deletePost{{id}}" aria-hidden="true">
+<div class="modal" id="deletePost{{id}}" >
     <div class="modal-background">
         <div class="modal-card">
             <header class="modal-card-head">
@@ -84,7 +80,7 @@
             </header>
 
             <section class="modal-card-body">
-                <p>Are you sure you want to delete your {{title}} post?</p>
+                <p>Are you sure you want to delete your <strong> {{title}} </strong>post?</p>
             </section>
 
             <footer class="modal-card-foot">
@@ -95,10 +91,12 @@
     </div>
 </div>
 {{/each}}
+{{else}}
+<h4> No Posts to Display Yet </h4>
 {{/if}}
 
 {{!-- new post modal --}}
-<div class="modal" id="addPost" aria-hidden="true">
+<div class="modal" id="addPost">
     <div class="modal-background">
         <div class="modal-card">
             <header class="modal-card-head">
@@ -131,33 +129,7 @@
 </div>
 
 {{!-- script tag to open and close modals --}}
-<script>
-    function openModal($el) {
-        $el.classList.add('is-active');
-    };
+<script src="/javascript/modal.js"></script>
 
-    function closeModal($el) {
-        $el.classList.remove('is-active');
-    };
 
-    const modalTriggers = (document.querySelectorAll('.js-modal-trigger'));
-    [...modalTriggers].forEach($trigger => {
-        const modal = $trigger.dataset.target;
-        const $target = document.getElementById(modal);
-
-        $trigger.addEventListener('click', () => {
-            openModal($target);
-        });
-    });
-
-    const modalClosers = (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot #cancel'))
-    [...modalClosers].forEach($close) => {
-        const $target = $close.closest('.modal');
-
-        $close.addEventListener('click', () => {
-            closeModal($target);
-        });
-    };
-</script>
-
-<script src="/public/javascript/post.js"></script>
+<script src="/javascript/post.js"></script>
