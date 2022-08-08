@@ -33,7 +33,8 @@ const commentEventHandler = async (event) => {
     }
 };
 
-const newCommentButton = document.querySelector('#new-comment-save').addEventListener('click', commentEventHandler);
+const newCommentButton = document.querySelector('#new-comment-save');
+newCommentButton.addEventListener('click', commentEventHandler);
 
 // edit comment handler 
 const editCommentHandler = async (event) => {
