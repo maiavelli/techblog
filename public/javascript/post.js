@@ -36,9 +36,9 @@ const editPostHandler = async (event) => {
     event.preventDefault();
     console.log(event.target);
 
-    const postID = event.target.getAttribute('data-id');
-    const title = document.querySelector(`#title${postID}`).value;
-    const post_body = document.querySelector(`#body${postID}`).value;
+    const postID = event.target.getAttribute('data-id')
+    const title = document.querySelector(`#title${postID}`).value
+    const post_body = document.querySelector(`#editedPost${postID}`).value
     console.log(title);
     console.log(post_body);
 
