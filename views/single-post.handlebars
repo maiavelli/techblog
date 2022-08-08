@@ -14,6 +14,17 @@
                     <p> <small>{{post.user.username}} · {{format_date post.created_at}} ·</small> </p>
                 </div>
 
+                {{#if loggedIn}}
+                <div class="buttons has-addons is-right mt-5 js-modal-trigger" data-target="addComment">
+                    <button class="button is-info is-small">
+                        <span class="icon is-small">
+                            <i class="fas fa-circle-plus"></i>
+                        </span>
+                        <span>Add New Comment</span>
+                    </button>
+                </div>   
+                {{/if}}
+
                 {{#if post.comments}}
                 {{#each post.comments}}
                 <article class="media">
@@ -54,17 +65,6 @@
                         </div>
                     </div>
                 </article>
-
-                {{#if loggedIn}}
-                <div class="buttons has-addons is-right mt-5 js-modal-trigger" data-target="addComment">
-                    <button class="button is-info is-small">
-                        <span class="icon is-small">
-                            <i class="fas fa-circle-plus"></i>
-                        </span>
-                        <span>Add New Comment</span>
-                    </button>
-                </div>   
-                {{/if}}
             </div>
         </article>
     </div>
