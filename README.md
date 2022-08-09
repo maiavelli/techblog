@@ -43,6 +43,7 @@ This application is deployed via [Heroku](https://maiavelli-tech-blog.herokuapp.
 ## Demo 
 Below is a short demo of the application's functionality: 
 
+![demo-gif](./Assets/demo.gif)
 
 ## Questions 
 For more information and to see more of my work, please visit my [GitHub](https://github.com/maiavelli/).
